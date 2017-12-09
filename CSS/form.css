@@ -1,0 +1,17 @@
+
+#Questions{
+    positon:absolute;
+    top:2px;
+    padding-left: 42%;
+    color: #2371D3;
+}
+form{
+    position: absolute;
+    top: 10%;
+    padding-left: 40%;
+    color: #2371D3;
+
+}
+#submit{
+    cursor: pointer;
+}

@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>测评</title>
+    <link rel="stylesheet" href="../Css/form.css">
+</head>
+<body onLoad="init()">
+<div id="Questions">Questionnaire From Dachemaitu</div>
+<form class="common_form" action="" method="POST" onsubmit="return false">
+    Name:
+    <input type="text" name="name" placeholder="eg:Zhou Jingyao"><br>
+    Id:
+    <input type="text" name="Id" placeholder="eg:201792137"><br>
+     Sex:<br>
+    <input type="radio" name="sex" value="male">Male <br>
+    <input type="radio" name="sex" value="female">Female <br>
+    <input type="radio" name="sex" value="both">Both <br>
+    Birthday:<br>
+    <div onload="init()">
+        <select id="year" onChange = "swap_day()"></select>-
+        <select id="month" onChange = "swap_day()"></select>-
+        <select id="day"></select>
+    </div>
+   <!-- Sexual orientation:<br>
+    <input type="radio" name="ori" value="formal">Formal  <br>
+    <input type="radio" name="ori" value="gay">Gay  <br>
+    <input type="radio" name="ori" value="les">Lesbian <br>
+    Do you have a girlfriend/boyfriend:<br>
+    <input type="radio" name="lover" value="yes">Yes <br>
+    <input type="radio" name="lover" value="no">No  <br>
+    <input type="radio" neme="lover" value="hand">Hand <br> -->
+    Do you often listen to music:<br>
+    <input type="radio">Usually <br>
+    <input type="radio">Sometimes <br>
+    <input type="radio">Seldom <br>
+    What kind of music do you prefer:<br>
+    <input type="checkbox">Classical <br>
+    <input type="checkbox">Pop <br>
+    <input type="checkbox">Rock'n roll <br>
+    <input type="checkbox">Folk <br>
+    <input type="checkbox">Pure <br>
+    Which one do you prefer:<br>
+    <input type="radio">Chinese music <br>
+    <input type="radio">The European and American music <br>
+    <input type="radio">Japan and South Korea music <br>
+    <input type="radio">Others <br>
+    What device do you use:<br>
+    <input type="checkbox">Mobile phone <br>
+    <input type="checkbox">MP3 <br>
+    <input type="checkbox">PC <br>
+    <input type="checkbox">Sing to myself <br>
+    Do you like music like "What does the fox say" or "Lost rivers"?<br>
+    <input type="radio">Yes <br>
+    <input type="radio">So so <br>
+    <input type="radio">No and never <br>
+    Which kind of music do you prefer:<br>
+    <input type="radio">The olds <br>
+    <input type="radio">The news <br>
+    <button type="button" id="submit" ><a href="form2.html">Submit</a></button>
+</form>
+</body>
+<script>
+    var month1 = new Array ("1","3","5","7","8","10","12");
+    var month2 = new Array ("4","6","9","11");
+    function init() {
+        var select_year = document.getElementById("year");
+        var select_month = document.getElementById("month");
+        var select_day = document.getElementById("day");
+        for( var i = 1980 ; i <= 2017 ;i++){
+            select_year_option = new Option(i,i);
+            select_year.options.add(select_year_option);
+        }
+        for( var i = 1 ;i <= 12 ; i++){
+            select_month_option = new Option(i,i);
+            select_month.options.add(select_month_option);
+        }
+        swap_day();
+    }
+    function array_contain(array, obj)
+    {
+        for (var i = 0; i < array.length; i++){
+            if (array[i] === obj){
+                return true;
+            }
+        }
+        return false;
+    }
+    function swap_day() {
+        var select_year = document.getElementById("year");
+        var select_month = document.getElementById("month");
+        var select_day = document.getElementById("day");
+        select_day.options.length = 0;
+        var month = select_month.options[select_month.selectedIndex].value;
+        if(array_contain(month1, month))
+        {
+            for(var i = 1; i <= 31; i++){
+                select_day_option = new Option(i, i);
+                select_day.options.add(select_day_option);
+            }
+        }
+        else if(array_contain(month2, month))
+        {
+            for(var i = 1; i <= 30; i++) {
+                select_day_option = new Option(i, i);
+                select_day.options.add(select_day_option);
+            }
+        }
+        else initFeb();
+    }
+    function isLeapYear(){
+        var a = year % 4;
+        var b = year % 100;
+        var c = year % 400;
+        if( (a == 0 && b != 0) || c == 0){
+            return true
+        }
+        return false;
+    }
+    function initFeb()
+    {
+        var select_year = document.getElementById("year");
+        var select_day = document.getElementById("day");
+        var year = parseInt(select_year.options[select_year.selectedIndex].value);
+        if(isLeapYear(year)){
+            for(var i = 1; i <= 29; i++){
+                select_day_option = new Option(i, i);
+                select_day.options.add(select_day_option);
+            }
+        }
+        else
+        {
+            for(var i = 1; i <= 28; i++){
+                select_day_option = new Option(i, i);
+                select_day.options.add(select_day_option);
+            }
+        }
+    }
+    <!--function check() {
+        if (form1.text1.value == "") {
+            alert("Please input your name");
+            return false;
+        }
+        if (form1.password1.value == "") {
+            alert("Please input your id")
+            return false;
+        }
+    }-->
+</script>
+</html>
